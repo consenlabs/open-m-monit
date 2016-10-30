@@ -97,7 +97,13 @@ $(document).ready(function () {
             } else {
                 $('<td/>').append($('<a/>', {"class": "inform",
                                              "href": dns,
-                                             "text": alias})).appendTo(row);
+                                             "text": alias}))
+                          .append('<br />')
+                          .append($('<a/>', {"class": "monit",
+                                             "target": "_blank",
+                                             "href": "http://" + dns.replace('localhost', window.location.hostname),
+                                             "text": alias + "[remote]"}))
+                          .appendTo(row);
                 for (var i = 0; i < length; i += 1) {
 		    /* disk */
                     if (processes[i].type == 0) {
