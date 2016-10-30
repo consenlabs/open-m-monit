@@ -2,6 +2,7 @@
  * Module dependencies.
  */
 
+var basicAuthConfig = require('./basicAuth.json')
 var express = require('express')
   , routes = require('./routes')
   , http = require('http')
@@ -39,12 +40,12 @@ if (connectionConf.type === 'tcp') {
   port = 3000;
 }
 
-
 app.configure(function () {
   app.set('port', port);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.enable('view cache');
+  app.use(express.basicAuth(basicAuthConfig.username, basicAuthConfig.password));
   app.use(express.favicon());
   //app.use(express.logger('dev'));
   app.use(express.bodyParser());
